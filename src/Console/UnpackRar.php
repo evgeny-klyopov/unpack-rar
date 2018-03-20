@@ -3,6 +3,7 @@
 
 namespace Alva\UnpackRar\Console;
 
+use Alva\UnpackRar\Extract;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -48,46 +49,31 @@ class UnpackRar extends Command
 
         $pathToRar = $input->getArgument('pathToRar');
 
-        var_dump($pathToRar);
+        $outputPath = $input->getArgument('outputPath');
+        $outputPath = $outputPath ?? PATH . DS;
 
-//
-//        $inOneTable = $input->getArgument('inOneTable');
-//        $inOneTable = (null === $inOneTable) ? 1 : (int)$inOneTable;
-//        $inOneTable = (0 !== $inOneTable) ? true : false;
-//
-//        $separatorColumns = $input->getArgument('separatorColumns');
-//        $separatorColumns = (null === $separatorColumns) ? ';' : $separatorColumns;
-//        $files            = $this->getFiles($pathToCsv);
-//
-//        $output->writeln('');
-//        $output->writeln('<comment>Params:</comment>');
-//        $output->writeln('<info><pathToCsv></info>: - ' . $pathToCsv);
-//        $output->writeln('<info><inOneTable></info>: - ' . $inOneTable);
-//        $output->writeln('<info><separatorColumns></info>: - ' . $separatorColumns);
-//        $output->writeln('');
-//
-//        $output->writeln('<comment>Convert files:</comment>');
-//        $output->writeln($files);
-//        $output->writeln('');
-//
-//        $output->writeln('<info>Run ...</info>');
-//
-//        try {
-//            $convertFiles = (new \Alva\CsvToSql\Convert(
-//                $files
-//                , OUTPUT_DIRECTORY
-//                , $inOneTable
-//                , $separatorColumns
-//            ))->run();
-//
+        $output->writeln('');
+        $output->writeln('<comment>Params:</comment>');
+        $output->writeln('<info><pathToRar></info>: - ' . $pathToRar);
+        $output->writeln('<info><outputPath></info>: - ' . $outputPath);
+        $output->writeln('');
+
+        $output->writeln('<comment>Unpack:</comment>');
+        $output->writeln('');
+
+        $output->writeln('<info>Run ...</info>');
+
+        try {
+            (new Extract($pathToRar, $outputPath))->run();
+
 //            $output->writeln('');
 //            $output->writeln('<comment>Sql files:</comment>');
 //            $output->writeln($convertFiles);
 //            $output->writeln('');
-//
-//            $output->writeln('<info>Success</info>');
-//        } catch (\Exception $e) {
-//            throw new \RuntimeException($e->getMessage());
-//        }
+
+            $output->writeln('<info>Success</info>');
+        } catch (\Exception $e) {
+            throw new \RuntimeException($e->getMessage());
+        }
     }
 }
