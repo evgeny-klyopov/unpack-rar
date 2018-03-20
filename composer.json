@@ -18,8 +18,13 @@
     "authors": [
         {
             "name": "Alva",
-            "homepage": "https://github.com/evgeny-klyopov/csv-to-sql",
+            "homepage": "https://github.com/evgeny-klyopov",
             "email": "mail@klepov.info",
+            "role": "Developer"
+        },
+        {
+            "name": "Khristenko Yura",
+            "homepage": "https://github.com/KhristenkoYura",
             "role": "Developer"
         }
     ],
